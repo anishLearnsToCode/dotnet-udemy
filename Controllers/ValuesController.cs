@@ -14,20 +14,21 @@ namespace DatingApp.API.Controllers
 
         public ValuesController(DataContext context)
         {
-            this._context = context;
+            _context = context;
         }
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2", "value3", "value4", "value5", "value6" };
+        public IActionResult GetValues(){
+            var values = _context.Values.ToList();
+            return Ok(values);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetValue(int id)
         {
-            return "value";
+            var value = _context.Values.Find(id);
+            return Ok(value);
         }
 
         // POST api/values
